@@ -4,6 +4,3 @@ management:
       exposure:
         include:
         - '*'
-card:
-  api:
-    version: 1.0-SNAPSHOT

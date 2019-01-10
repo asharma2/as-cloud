@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: student-aas-deploy
+spec:
+  replicas: 1
+  minReadySeconds: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: student-aas
+    spec:
+      containers:
+      - name: student
+        image: atulkumarsharma1986/cloud-image:student-aas
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: spring.profiles.active
+          value: local
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+        - name: aks-kubernets
+        #myregistrykey
